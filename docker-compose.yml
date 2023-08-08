@@ -1,0 +1,30 @@
+version: '3.8'
+
+#ssl not working local only on server
+
+services:
+
+  node_app:
+    build: 
+      context: .
+      dockerfile: C:\Program Files\Dock\app\Dockerfile
+    container_name: app_demo
+    restart: unless-stopped
+    volumes:
+      - C:\Program Files\Dock\app:/usr/src/app
+
+  nginx:
+    image: nginx
+    container_name: nginx_1
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      # ssl certificate
+      # - "443:443"
+    volumes:
+        - C:\Program Files\Dock\nginx\nginx.conf:/etc/nginx/conf.d/default.conf
+        # ssl certifcate
+        # - ./certbot/conf:/etc/letsencrypt
+        # - ./certbot/www:/var/www/certbot
+    depends_on:
+      - node_app
