@@ -11,7 +11,7 @@ services:
     container_name: app_demo
     restart: unless-stopped
     volumes:
-      - C:\Program Files\Dock\app:/usr/src/app
+      - C:\Program Files\Dock\app\node_1:/usr/src/app
 
   nginx:
     image: nginx
